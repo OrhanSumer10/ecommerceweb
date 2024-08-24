@@ -1,0 +1,63 @@
+﻿@model ProductListViewModel
+
+@{
+    Layout = "_AdminLayout";
+}
+
+
+<h2>Product List</h2>
+
+<table class="table table-bordered" id="admin-table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Category Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Price</th>
+            <th scope="col">Brand</th>
+            <th scope="col">CreatedDate</th>
+            <th scope="col">ImageUrl</th>
+            <th scope="col">ManufactureDate</th>
+            <th scope="col">Rating</th>
+            <th scope="col">SKU</th>
+            <th scope="col">Stock</th>
+            <th scope="col">WP</th>
+            <th scope="col">EDİT </th>
+            <th scope="col">DELETE </th>
+        </tr>
+    </thead>
+    @foreach (var product in Model.Products)
+    {
+        <tbody>
+            <tr>
+                <td>@product.ProductId</td>
+                <td>@product.Name</td>
+                <td>
+                    @foreach (var item in (List<SelectListItem>)ViewBag.cv)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                </td>
+                <td>@product.Description</td>
+                <td>@product.Price</td>
+                <td>@product.Brand</td>
+                <td>@product.CreatedDate</td>
+                <td><img class="product-admin-img" src="@product.ImageUrl" /></td>
+                <td>@product.ManufactureDate</td>
+                <td>@product.Rating</td>
+                <td>@product.SKU</td>
+                <td>@product.Stock</td>
+                <td>@product.WarrantyPeriod</td>
+                <td><a class="btn btn-outline-warning" asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@product.ProductId"><i class='bx bx-edit-alt'></i></a></td>
+                <td>
+                    <a class="btn btn-outline-danger" asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@product.ProductId">
+                        <i class='bx bx-x'></i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    }
+
+</table>
+<a class="btn btn-outline-primary" asp-controller="Cart" asp-action="AddToCart"> <i class='bx bx-plus'></i>ADD PRODUCT</a>

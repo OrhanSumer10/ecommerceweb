@@ -1,0 +1,56 @@
+﻿@model ProductListViewModel
+
+@{
+    Layout = "_Layout";
+}
+<div class="alert alert-success" id="alertMessage" style="display:none;">
+    @TempData["Message"]
+</div>
+<form id="addToCartForm" method="post" action="@Url.Action("AddToCart", "Cart")">
+    <div class="product-container">
+
+        @foreach (var product in Model.Products)
+        {
+            <div class="product-box">
+                <img src="@product.ImageUrl" alt="@product.Name" />
+                <span>@product.Name</span>
+                <span>@product.Price ₺</span>
+
+                <!-- Gizli input kullanarak ürün ID'sini saklıyoruz -->
+                <input type="hidden" name="ProductId" value="@product.ProductId" />
+
+                <!-- A etiketi ile tıklama işlemi -->
+                <a href="javascript:void(0);" onclick="submitForm(@product.ProductId)" class="btn btn-outline-success">
+                    <i class='bx bx-shopping-bag'></i> Add To Cart
+                </a>
+            </div>
+        }
+    </div>
+</form>
+
+<script>
+    const alertMsg = document.getElementById('alertMessage');
+    function submitForm(productId) {
+        // ProductId değerini form elemanına ayarlıyoruz
+        document.querySelector('input[name="ProductId"]').value = productId;
+
+        // Formu gönderiyoruz
+        document.getElementById('addToCartForm').submit();
+        // Formun submit olduğu sayfada (örneğin, başarı ile form gönderildikten sonra) bu kod çalışır
+  
+            if (@(TempData["Message"] != null ? "true" : "false")) {
+                const alertMsg = document.getElementById('alertMessage');
+                alertMsg.style.display = 'block'; // Mesajı göster
+
+            
+            }
+    }
+    // 2 saniye sonra mesajı gizle
+    setTimeout(function () {
+        alertMsg.style.display = 'none';
+    }, 2000);
+   
+ 
+
+
+</script>

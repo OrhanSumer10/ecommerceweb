@@ -1,0 +1,41 @@
+﻿@model CartListViewModel
+
+@if (Model.CartItems == null || !Model.CartItems.Any())
+{
+    <p>Sepetiniz boş.</p>
+    <a class="dropdown-item" asp-controller="Product" asp-action="Index">Ürün ekleyin</a>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Image</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total Price</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.CartItems)
+            {
+                var itemTotalPrice = item.Product.Price * item.Quantity;
+                <tr>
+                    <td>@item.Product.Name</td>
+                    <td><img class="product-cart-img" src="@item.Product.ImageUrl" /></td>
+                    <td>@item.Quantity</td>
+                    <td>@itemTotalPrice</td>
+                    <td>
+                        <form method="post" asp-controller="Cart" asp-action="RemoveFromCart">
+                            <input type="hidden" name="cartItemId" value="@item.CartItemId" />
+                            <button type="submit" class="btn btn-outline-danger btn-sm">
+                                <i class='bx bx-x'></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

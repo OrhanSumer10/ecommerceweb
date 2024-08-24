@@ -1,0 +1,386 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* ===== Colors ===== */
+    --body-color: #E4E9F7;
+    --sidebar-color: #FFF;
+    --primary-color: #695CFE;
+    --primary-color-light: #F6F5FF;
+    --toggle-color: #DDD;
+    --text-color: #707070;
+    /* ====== Transition ====== */
+    --tran-03: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.3s ease;
+    --tran-05: all 0.3s ease;
+    --color-primary: #7380ec;
+    --color-danger: #ff7782;
+    --color-success: #41f1b6;
+    --color-warning: #ffbb55;
+    --color-white: #fff;
+    --color-info-dark: #7d8da1;
+    --color-info-light: #dce1eb;
+    --color-dark: #363949;
+    --color-light: rgba(132, 139, 200, 0.18);
+    --color-primary-variant: #111e88;
+    --color-dark-variant: #677483;
+    --color-background: #f6f6f9;
+    --card-border-radius: 2rem;
+    --border-radius-1: 0.4rem;
+    --border-radius-2: 0.8rem;
+    --border-radius-3: 1.2rem;
+    --card-padding: 1.8rem;
+    --padding-1: 1.2rem;
+    --box-shadow: 0 2rem 3rem var(--color-light);
+    --linear-grad: linear-gradient(to right, #141E30, #243B55);
+    --grad-clr1: #141E30;
+    --grad-clr2: #243B55;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+a {
+    color: black;
+}
+
+body {
+    margin-bottom: 60px;
+    font-family: "Poppins", sans-serif;
+    background-color: #F8F7FA;
+}
+
+header {
+    display: flex;
+    justify-content: space-around;
+    background-color: #e5ebfc;
+    align-items: center;
+    height: 5rem;
+}
+
+    header .header-left-side {
+        display: flex;
+    }
+
+        header .header-left-side i {
+            margin-right: .5rem;
+            font-size: 1.4rem;
+        }
+
+        header .header-left-side h4 {
+            font-size: 1rem;
+        }
+
+    header .header-middle-side {
+        flex-direction: row;
+    }
+
+        header .header-middle-side ul {
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+            header .header-middle-side ul li {
+                list-style: none;
+                margin-left: 1rem;
+            }
+
+                header .header-middle-side ul li a {
+                    text-decoration: none;
+                    color: black;
+                    position: relative;
+                }
+
+                    header .header-middle-side ul li a::after {
+                        content: "";
+                        position: absolute;
+                        height: 2px;
+                        width: 0;
+                        bottom: 0;
+                        left: 0;
+                        background-color: black;
+                        transition: all 0.6s ease;
+                    }
+
+                    header .header-middle-side ul li a:hover::after {
+                        width: 100%;
+                    }
+
+    header .header-right-side {
+        margin-right: 4rem;
+    }
+
+        header .header-right-side .icon-links {
+            display: flex;
+            width: 5rem;
+        }
+
+            header .header-right-side .icon-links ul {
+                display: flex;
+                justify-content: space-between;
+            }
+
+                header .header-right-side .icon-links ul li {
+                    list-style: none;
+                }
+
+            header .header-right-side .icon-links a {
+                color: black;
+            }
+
+                header .header-right-side .icon-links a i {
+                    font-size: 1.4rem;
+                    margin-left: .7rem;
+                }
+
+                header .header-right-side .icon-links a:hover {
+                    transition: all 0.3s ease;
+                }
+
+/*Login*/
+/* Login Container */
+.login-container {
+    width: 80rem;
+    height: 35em;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    position: relative; /* Konumlandýrma için gerekli */
+}
+    /* Sol ve Sað Kýsýmlar */
+    .login-container .login-left,
+    .login-container .login-right {
+        width: 50%; /* Her iki bölgenin geniþliði */
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute; /* Pozisyonlama için */
+        transition: transform 0.5s ease-in-out; /* Animasyon efekti */
+    }
+
+    /* Sol Kýsým (Baþlangýçta görünür) */
+    .login-container .login-left {
+        transform: translateX(0); /* Baþlangýçta solda */
+    }
+
+    /* Sað Kýsým (Baþlangýçta saðda) */
+    .login-container .login-right {
+        transform: translateX(100%); /* Baþlangýçta saðda */
+    }
+
+#alert-login {
+    display: none;
+}
+
+.login-title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
+
+.login-panel-image {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 4rem;
+}
+
+    .login-panel-image img {
+        width: 200px;
+        height: 200px;
+    }
+/* Panel ve Buton */
+.panel {
+    background-color: #004AFA;
+    color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 50%;
+    position: absolute;
+    top: 0;
+    z-index: 2; /* Panelin üstte görünmesini saðlar */
+    transform: translateX(100%);
+}
+
+    /* Buton Stili */
+    .panel button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 5px;
+        /* Kaydýrma animasyonunu ekler */
+    }
+
+
+#login-button, #sign-up-button {
+    border-radius: 2rem;
+    background-color: transparent;
+    border: white solid 2px;
+}
+
+.show-sign-up {
+    transform: translateX(0); /* Sað paneli sola kaydýrýr */
+    transition: transform 1s ease-in-out;
+    border-radius: 3rem;
+}
+
+/* Soldaki paneli saða kaydýrýr */
+.show-login {
+    transform: translateX(100%); /* Soldaki paneli saða kaydýrýr */
+    transition: transform 1s ease-in-out;
+    border-radius: 3rem;
+}
+
+
+
+/* Form Stili */
+.btn-login-forms {
+    font-weight: 100;
+    font-size: 1.3rem;
+    width: 20rem;
+    height: 3rem;
+    background-color: #004cff;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+}
+
+.btn-logout {
+    border: none;
+    width: 100%;
+}
+
+.input-field-login input {
+    border: none;
+    text-align: center;
+    border-radius: 2rem;
+    width: 20rem;
+    height: 3rem;
+    background-color: #f8f8f8;
+}
+
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    width: 250px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    font-size: .8rem;
+    right: 10px; /* Ýçeriði sola kaydýrmak için bu deðeri ayarlayabilirsiniz */
+}
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        background-color: #f9f9f9;
+        font-size: 1rem;
+    }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    justify-content: center;
+    align-items: center;
+}
+
+.dropdown .dropbtn i {
+    margin-left: 1rem;
+    color: black;
+    background-color: transparent;
+}
+
+    .dropdown .dropbtn i:hover {
+        background-color: transparent;
+        cursor: pointer;
+    }
+
+.dropdown-content a {
+    display: flex;
+    margin-left: 0;
+}
+
+/* Product Index*/
+.product-container {
+    display: flex;
+}
+
+.product-box {
+    width: 200px;
+    height: 300px;
+    background-color: white;
+    padding: 0; /* Ýç boþluðu sýfýrlar */
+    margin: 2rem 1rem 2rem 2rem; /* Dýþ boþluðu sýfýrlar */
+    box-shadow: var(--box-shadow);
+   
+    flex-direction: column;
+    border-radius: 5px;
+    display: flex; /* Flexbox kullanarak içeriði hizalamak için */
+    align-items: center; /* Dikeyde ortalar */
+    justify-content: space-between;
+}
+
+    .product-box img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+    }
+
+    .product-box a {
+        margin-bottom: 1rem;
+    }
+
+#cart-table {
+    margin-top: 2rem;
+}
+
+#cartItem {
+   padding:1rem;
+    width: auto;
+    justify-content: center;
+    align-content:center;
+}
+
+.product-cart-img {
+    width: 50px;
+    height: 50px;
+}
+
+#alertMessage{
+    position:relative;
+    margin:2rem;
+}

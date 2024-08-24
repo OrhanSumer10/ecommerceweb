@@ -1,0 +1,47 @@
+﻿@model CartListViewModel
+
+@if (Model.CartItems == null || !Model.CartItems.Any())
+{
+    <h2>Sepetiniz boş </h2>
+}else{
+<table class="table table-bordered" id="cart-table">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Price</th>
+            <th scope="col">Brand</th>
+            <th scope="col">ImageUrl</th>
+            <th scope="col">Rating</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Total Price</th>
+            <th scope="col">DELETE </th>
+        </tr>
+    </thead>
+    @foreach (var product in Model.CartItems)
+    {
+            // Her ürünün toplam fiyatını hesapla
+            var itemTotalPrice = product.Product.Price * product.Quantity;
+        <tbody>
+            <tr>
+                <td>@product.Product.Name</td>
+                <td>@product.Product.Description</td>
+                <td>@product.Product.Price</td>
+                <td>@product.Product.Brand</td>
+                <td><img class="product-cart-img" src="@product.Product.ImageUrl" /></td>
+                <td>@product.Product.Rating</td>
+                <td>@product.Quantity</td>
+                    <td>@itemTotalPrice</td>
+                <td>
+                    <form method="post" asp-controller="Cart" asp-action="RemoveFromCart">
+                        <input type="hidden" name="cartItemId" value="@product.CartItemId" />
+                        <button type="submit" class="btn btn-outline-danger">
+                            <i class='bx bx-x'></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    }
+</table>
+}
